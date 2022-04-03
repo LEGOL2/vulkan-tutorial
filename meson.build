@@ -1,4 +1,4 @@
-project('vulkan-tutorial', 'cpp')
+project('vulkan-tutorial', 'cpp', default_options: 'cpp_std=c++17')
 
 cmake = import('cmake')
 
@@ -11,7 +11,15 @@ glm = cmake.subproject('glm')
 dependencies = [
     glfw.dependency('glfw'),
     glm.dependency('glm'),
-    dependency('vulkan')
+    dependency('vulkan'),
+    dependency('threads')
 ]
 
-executable('vulkan-tutorial', 'main.cpp', dependencies: dependencies)
+compiler_flags = [
+    '-g'
+]
+
+sources = files('main.cpp')
+subdir('window')
+
+executable('vulkan-tutorial', sources: sources, dependencies: dependencies, cpp_args: compiler_flags)

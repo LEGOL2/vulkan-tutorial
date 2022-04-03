@@ -4,7 +4,7 @@
 		{
 			"label": "Build",
 			"type": "shell",
-			"command": "meson compie -C build",
+			"command": "meson compile -C build",
 			"group": {
 				"kind": "build",
 				"isDefault": true

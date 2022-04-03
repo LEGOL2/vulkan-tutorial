@@ -10,7 +10,8 @@ glm = cmake.subproject('glm')
 
 dependencies = [
     glfw.dependency('glfw'),
-    glm.dependency('glm')
+    glm.dependency('glm'),
+    dependency('vulkan')
 ]
 
 executable('vulkan-tutorial', 'main.cpp', dependencies: dependencies)

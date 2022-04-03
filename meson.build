@@ -3,9 +3,8 @@ project('vulkan-tutorial', 'cpp')
 cmake = import('cmake')
 
 glfw_cmake_options = cmake.subproject_options()
-glfw_cmake_options.add_cmake_defines({'GLFW_USE_WAYLAND': true})
+glfw_cmake_options.add_cmake_defines({'GLFW_BUILD_WAYLAND': true})
 glfw = cmake.subproject('glfw', options: glfw_cmake_options)
-
 
 glm = cmake.subproject('glm')
 

@@ -16,7 +16,7 @@ dependencies = [
 ]
 
 compiler_flags = [
-    '-g'
+#    '-g'
 ]
 
 sources = files('main.cpp')

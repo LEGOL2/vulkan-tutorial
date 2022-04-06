@@ -1,12 +1,12 @@
 #include <iostream>
 
-#include "window/WindowManager.hpp"
+#include "window/Application.hpp"
 
 int main() {
-    WindowManager windowManager;
+    Application app;
 
     try {
-        windowManager.run();
+        app.run();
     } catch (const std::exception &e) {
         std::cerr << e.what() << std::endl;
         return EXIT_FAILURE;

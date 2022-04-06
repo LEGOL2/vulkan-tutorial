@@ -1,4 +1,4 @@
 sources += files(
-    'WindowManager.cpp',
-    'WindowManager.hpp'
+    'Application.cpp',
+    'Application.hpp'
 )

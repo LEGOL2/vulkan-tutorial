@@ -20,6 +20,6 @@ compiler_flags = [
 ]
 
 sources = files('main.cpp')
-subdir('window')
+subdir('application')
 
 executable('vulkan-tutorial', sources: sources, dependencies: dependencies, cpp_args: compiler_flags)

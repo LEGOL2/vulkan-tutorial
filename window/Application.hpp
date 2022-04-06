@@ -14,12 +14,15 @@ class Application {
     void initVulkan();
     void createInstance();
     void pickPhysicalDevice();
+    void createLogicalDevice();
     void mainLoop();
     void cleanup();
 
     GLFWwindow *window;
     VkInstance instance;
     VkPhysicalDevice physicalDevice = VK_NULL_HANDLE;
+    VkDevice device;
+    VkQueue graphicsQueue;
 };
 
 struct QueueFamilyIndices {

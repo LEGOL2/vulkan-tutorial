@@ -1,0 +1,8 @@
+[submodule "glfw"]
+	path = glfw
+	url = https://github.com/glfw/glfw.git
+	branch = 3.3-stable
+[submodule "glm"]
+	path = glm
+	url = https://github.com/g-truc/glm.git
+	branch = tags/0.9.9.8

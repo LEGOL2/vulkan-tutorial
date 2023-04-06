@@ -1,0 +1,5 @@
+list(APPEND APP_SOURCES
+    ${CMAKE_CURRENT_SOURCE_DIR}/app.cpp
+)
+
+target_sources(${PROJECT_NAME} PRIVATE ${APP_SOURCES})

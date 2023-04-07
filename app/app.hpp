@@ -3,6 +3,7 @@
 
 #include <cstdint>
 #include <iostream>
+#include <optional>
 #include <vector>
 
 constexpr uint32_t WIDTH = 800;
@@ -23,6 +24,11 @@ VkResult CreateDebugUtilsMessengerEXT(VkInstance instance, const VkDebugUtilsMes
 void DestroyDebugUtilsMessengerEXT(VkInstance instance, VkDebugUtilsMessengerEXT debugMessenger,
                                    const VkAllocationCallbacks *pAllocator);
 
+struct QueueFamilyIndices {
+    std::optional<uint32_t> graphicsFamily;
+    bool isComplete() { return graphicsFamily.has_value(); }
+};
+
 class App {
    public:
     void run();
@@ -30,6 +36,10 @@ class App {
    private:
     void initWindow();
     void initVulkan();
+    void pickPhysicalDevice();
+    void createLogicalDevice();
+    bool isDeviceSuitable(VkPhysicalDevice device);
+    QueueFamilyIndices findQueueFamilies(VkPhysicalDevice device);
     void createInstance();
     void mainLoop();
     void cleanup();
@@ -52,5 +62,8 @@ class App {
 
     GLFWwindow *window;
     VkInstance instance;
+    VkPhysicalDevice physicalDevice = VK_NULL_HANDLE;
+    VkDevice device;
+    VkQueue graphicsQueue;
     VkDebugUtilsMessengerEXT debugMessenger;
 };

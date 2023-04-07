@@ -26,7 +26,9 @@ void DestroyDebugUtilsMessengerEXT(VkInstance instance, VkDebugUtilsMessengerEXT
 
 struct QueueFamilyIndices {
     std::optional<uint32_t> graphicsFamily;
-    bool isComplete() { return graphicsFamily.has_value(); }
+    std::optional<uint32_t> presentFamily;
+
+    bool isComplete() { return graphicsFamily.has_value() && presentFamily.has_value(); }
 };
 
 class App {
@@ -41,6 +43,7 @@ class App {
     bool isDeviceSuitable(VkPhysicalDevice device);
     QueueFamilyIndices findQueueFamilies(VkPhysicalDevice device);
     void createInstance();
+    void createSurface();
     void mainLoop();
     void cleanup();
 
@@ -62,8 +65,10 @@ class App {
 
     GLFWwindow *window;
     VkInstance instance;
+    VkSurfaceKHR surface;
     VkPhysicalDevice physicalDevice = VK_NULL_HANDLE;
     VkDevice device;
     VkQueue graphicsQueue;
+    VkQueue presentQueue;
     VkDebugUtilsMessengerEXT debugMessenger;
 };

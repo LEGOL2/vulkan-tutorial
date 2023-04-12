@@ -57,6 +57,7 @@ class App {
     VkPresentModeKHR chooseSwapchainPresentMode(const std::vector<VkPresentModeKHR> &availablePresentModes);
     VkExtent2D chooseSwapchainExtent(const VkSurfaceCapabilitiesKHR &capabilities);
     void createSwapchain();
+    void createImageViews();
     void mainLoop();
     void cleanup();
 
@@ -85,6 +86,7 @@ class App {
     VkQueue presentQueue;
     VkSwapchainKHR swapchain;
     std::vector<VkImage> swapchainImages;
+    std::vector<VkImageView> swapchainImageViews;
     VkFormat swapchainImageFormat;
     VkExtent2D swapchainExtent;
 

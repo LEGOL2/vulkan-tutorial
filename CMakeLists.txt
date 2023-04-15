@@ -10,6 +10,12 @@ endif()
 
 find_package(Vulkan REQUIRED)
 
+if(MSVC)
+    add_compile_options(/W3 /WX)
+else()
+    add_compile_options(-Wall -Wextra -Wpedantic -Werror)
+endif()
+
 # Build GLFW from sources
 set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "Build the GLFW example programs")
 set(GLFW_BUILD_TESTS OFF CACHE BOOL "Build the GLFW test programs")
@@ -27,9 +33,3 @@ add_subdirectory(shaders)
 target_include_directories(${PROJECT_NAME} PRIVATE ${Vulkan_INCLUDE_DIRS})
 
 target_link_libraries(${PROJECT_NAME} ${Vulkan_LIBRARIES} glfw)
-
-if(MSVC)
-    target_compile_definitions(${PROJECT_NAME} PRIVATE /W4 /WX)
-else()
-    target_compile_definitions(${PROJECT_NAME} PRIVATE -Wall -Wextra -Wpedantic -Werror)
-endif()

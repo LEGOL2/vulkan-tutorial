@@ -91,6 +91,7 @@ class App {
     std::vector<VkImageView> swapchainImageViews;
     VkFormat swapchainImageFormat;
     VkExtent2D swapchainExtent;
+    VkPipelineLayout pipelineLayout;
 
     VkDebugUtilsMessengerEXT debugMessenger;
 };

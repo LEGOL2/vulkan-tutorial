@@ -58,6 +58,8 @@ class App {
     VkExtent2D chooseSwapchainExtent(const VkSurfaceCapabilitiesKHR &capabilities);
     void createSwapchain();
     void createImageViews();
+    VkShaderModule createShaderModule(const std::vector<char> &code);
+    void createGraphicsPipeline();
     void mainLoop();
     void cleanup();
 

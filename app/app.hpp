@@ -94,6 +94,7 @@ class App {
     VkExtent2D swapchainExtent;
     VkRenderPass renderPass;
     VkPipelineLayout pipelineLayout;
+    VkPipeline graphicsPipeline;
 
     VkDebugUtilsMessengerEXT debugMessenger;
 };

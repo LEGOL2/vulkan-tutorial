@@ -59,6 +59,7 @@ class App {
     void createSwapchain();
     void createImageViews();
     VkShaderModule createShaderModule(const std::vector<char> &code);
+    void createRenderPass();
     void createGraphicsPipeline();
     void mainLoop();
     void cleanup();
@@ -91,6 +92,7 @@ class App {
     std::vector<VkImageView> swapchainImageViews;
     VkFormat swapchainImageFormat;
     VkExtent2D swapchainExtent;
+    VkRenderPass renderPass;
     VkPipelineLayout pipelineLayout;
 
     VkDebugUtilsMessengerEXT debugMessenger;

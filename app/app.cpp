@@ -50,6 +50,7 @@ void App::initVulkan() {
     createImageViews();
     createRenderPass();
     createGraphicsPipeline();
+    createFramebuffers();
 }
 
 void App::pickPhysicalDevice() {
@@ -356,7 +357,7 @@ VkShaderModule App::createShaderModule(const std::vector<char> &code) {
 
 void App::createRenderPass() {
     VkAttachmentDescription colorAttachment{};
-    colorAttachment.format = swapChainImageFormat;
+    colorAttachment.format = swapchainImageFormat;
     colorAttachment.samples = VK_SAMPLE_COUNT_1_BIT;
     colorAttachment.loadOp = VK_ATTACHMENT_LOAD_OP_CLEAR;
     colorAttachment.storeOp = VK_ATTACHMENT_STORE_OP_STORE;
@@ -523,6 +524,26 @@ void App::createGraphicsPipeline() {
     vkDestroyShaderModule(device, fragShaderModule, nullptr);
 }
 
+void App::createFramebuffers() {
+    swapchainFramebuffers.resize(swapchainImageViews.size());
+    for (size_t i = 0; i < swapchainImageViews.size(); i++) {
+        VkImageView attachments[] = {swapchainImageViews[i]};
+
+        VkFramebufferCreateInfo framebufferInfo{};
+        framebufferInfo.sType = VK_STRUCTURE_TYPE_FRAMEBUFFER_CREATE_INFO;
+        framebufferInfo.renderPass = renderPass;
+        framebufferInfo.attachmentCount = 1;
+        framebufferInfo.pAttachments = attachments;
+        framebufferInfo.width = swapchainExtent.width;
+        framebufferInfo.height = swapchainExtent.height;
+        framebufferInfo.layers = 1;
+
+        if (vkCreateFramebuffer(device, &framebufferInfo, nullptr, &swapchainFramebuffers[i]) != VK_SUCCESS) {
+            throw std::runtime_error("failed to create framebuffer");
+        }
+    }
+}
+
 void App::mainLoop() {
     while (!glfwWindowShouldClose(window)) {
         glfwPollEvents();
@@ -534,7 +555,11 @@ void App::cleanup() {
         DestroyDebugUtilsMessengerEXT(instance, debugMessenger, nullptr);
     }
 
-    for (auto imageView : swapchainImageViews) {
+    for (auto &framebuffer : swapchainFramebuffers) {
+        vkDestroyFramebuffer(device, framebuffer, nullptr);
+    }
+
+    for (auto &imageView : swapchainImageViews) {
         vkDestroyImageView(device, imageView, nullptr);
     }
 

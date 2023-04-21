@@ -61,6 +61,7 @@ class App {
     VkShaderModule createShaderModule(const std::vector<char> &code);
     void createRenderPass();
     void createGraphicsPipeline();
+    void createFramebuffers();
     void mainLoop();
     void cleanup();
 
@@ -95,6 +96,7 @@ class App {
     VkRenderPass renderPass;
     VkPipelineLayout pipelineLayout;
     VkPipeline graphicsPipeline;
+    std::vector<VkFramebuffer> swapchainFramebuffers;
 
     VkDebugUtilsMessengerEXT debugMessenger;
 };
